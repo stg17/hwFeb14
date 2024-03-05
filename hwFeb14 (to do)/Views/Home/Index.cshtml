@@ -1,0 +1,60 @@
+﻿@model ToDoItemsViewModel
+
+<div class="container">
+    <div class="row">
+        <a href="/home/newitem" class="btn btn-info">New Item</a>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category Name</th>
+                        <th>Due Date</th>
+                        <th>Mark as Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model.categories)
+                    {
+                        foreach (var item in category.toDoItems)
+                        {
+                            if (!item.CompletedDate.HasValue)
+                            {
+                                if (item.DueDate < DateTime.Now)
+                                {
+                                    <tr class ="table-danger">
+                                        <td>@item.Title</td>
+                                        <td>@category.Name</td>
+                                        <td>@item.DueDate.ToShortDateString()</td>
+                                        <td>
+                                            <form method="post" action="/home/markascompleted">
+                                                <input name="id" value=@item.Id type="hidden" />
+                                                <button class="btn btn-primary">Mark as Completed</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr >
+                                        <td>@item.Title</td>
+                                        <td>@category.Name</td>
+                                        <td>@item.DueDate.ToShortDateString()</td>
+                                        <td>
+                                            <form method="post" action="/home/markascompleted">
+                                                <input name="id" value=@item.Id type="hidden" />
+                                                <button class="btn btn-primary">Mark as Completed</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

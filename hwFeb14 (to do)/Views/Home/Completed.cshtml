@@ -1,0 +1,32 @@
+﻿@model ToDoItemsViewModel
+
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category Name</th>
+                    <th>Completed Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var category in Model.categories)
+                {
+                    foreach(var item in category.toDoItems)
+                    {
+                        if (item.CompletedDate.HasValue)
+                        {
+                            <tr>
+                                <td>@item.Title</td>
+                                <td>@category.Name</td>
+                                <td>@item.CompletedDate.Value.ToShortDateString()</td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

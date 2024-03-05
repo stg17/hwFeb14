@@ -1,0 +1,32 @@
+﻿@model ToDoItemsViewModel
+
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <a href="/home/newcategory" class="btn btn-success">New Category</a>
+        <br />
+        <table class="table table-hover table-striped table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model.categories)
+                {
+                    <tr>
+                        <td>
+                            <a href="/home/ByCategory?id=@category.Id">
+                                @category.Name
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/home/editcategory?id=@category.Id" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
